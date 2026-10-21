@@ -13,7 +13,7 @@
         </li>
         <li>
           <strong>Cuidamos do resto:</strong>
-          <span class="placeholder">[passagem de som, horário, estrutura]</span>.
+          passagem de som antes dos convidados chegarem, horário combinado cumprido e alinhamento direto com o cerimonial ou a produção.
         </li>
       </ul>
     </div>

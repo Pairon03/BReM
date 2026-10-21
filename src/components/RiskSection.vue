@@ -1,3 +1,7 @@
+<script setup>
+import { CONTEUDO } from '../config.js'
+</script>
+
 <template>
   <section class="section risco" aria-labelledby="risco-titulo">
     <div class="container">
@@ -5,7 +9,7 @@
       <ul class="risco__lista" role="list">
         <li>Data reservada com sinal e contrato.</li>
         <li>Pontualidade garantida.</li>
-        <li><span class="placeholder">[Garantia extra, se houver.]</span></li>
+        <li v-if="CONTEUDO.garantiaExtra">{{ CONTEUDO.garantiaExtra }}</li>
       </ul>
     </div>
   </section>

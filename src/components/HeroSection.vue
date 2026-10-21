@@ -1,5 +1,5 @@
 <script setup>
-import { WHATSAPP } from '../config.js'
+import { CONTEUDO, WHATSAPP } from '../config.js'
 import GuitarSvg from './GuitarSvg.vue'
 import IconWhatsapp from './IconWhatsapp.vue'
 </script>
@@ -21,7 +21,7 @@ import IconWhatsapp from './IconWhatsapp.vue'
             Quero esse clima no meu evento
           </a>
           <p class="hero__micro">
-            Proposta com valores em até <span class="placeholder">[X horas]</span>, sem compromisso.
+            Proposta com valores em até {{ CONTEUDO.prazoProposta }}, sem compromisso.
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@ import IconWhatsapp from './IconWhatsapp.vue'
         <figure class="hero__foto duotone">
           <img
             src="/img/hero.jpg"
-            alt="Breno Ramos e Marcelo cantando com violão em um show"
+            alt="Breno Ramos e Marcelo abraçados, sorrindo e mostrando a língua"
             width="800"
             height="1000"
             fetchpriority="high"

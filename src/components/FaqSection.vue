@@ -1,11 +1,13 @@
 <script setup>
+import { CONTEUDO } from '../config.js'
+
 const perguntas = [
   {
     p: 'É caro?',
     r: 'O valor muda com o formato, o local e a duração. Montamos uma proposta no seu orçamento.',
   },
   { p: 'E se meu evento for pequeno?', r: 'O formato Resenha foi feito para isso.' },
-  { p: 'Com quanto tempo contratar?', r: null },
+  { p: 'Com quanto tempo contratar?', r: `${CONTEUDO.antecedencia}, para garantir sua data.` },
 ]
 </script>
 
@@ -19,10 +21,7 @@ const perguntas = [
             <span>{{ item.p }}</span>
             <span class="faq__icone" aria-hidden="true"></span>
           </summary>
-          <p v-if="item.r">{{ item.r }}</p>
-          <p v-else>
-            <span class="placeholder">[prazo ideal]</span> para garantir sua data.
-          </p>
+          <p>{{ item.r }}</p>
         </details>
       </div>
     </div>

@@ -1,24 +1,30 @@
 # TODO: conteúdo pendente
 
-## Textos (placeholders [entre colchetes] visíveis no site)
-- [ ] Hero, microtexto: `[X horas]` → `src/components/HeroSection.vue`
-- [ ] Quem somos: `[2 a 3 frases sobre a história da dupla]` → `src/components/AboutSection.vue`
-- [ ] Esforço quase zero: `[passagem de som, horário, estrutura]` → `src/components/EffortSection.vue`
-- [ ] Depoimentos (3x): `[frase]`, `[nome]`, `[tipo de evento]` → `src/components/ProofSection.vue`
-- [ ] Redução de risco: `[Garantia extra, se houver.]` → `src/components/RiskSection.vue`
-- [ ] FAQ: `[prazo ideal]` → `src/components/FaqSection.vue`
+O site já pode ir ao ar sem nenhum `[placeholder]` visível. O que falta é confirmar
+com a dupla e trocar a mídia provisória.
 
-Depois de preencher, remova o `<span class="placeholder">` em volta do texto.
+## Confirmar com a dupla (tudo em `src/config.js`, objeto `CONTEUDO`)
+- [ ] `prazoProposta`: hoje "24 horas" (hero). Eles conseguem responder nesse prazo?
+- [ ] `antecedencia`: hoje "3 a 6 meses" (FAQ).
+- [ ] `garantiaExtra`: vazio = item escondido na seção de garantias.
+- [ ] `depoimentos`: lista vazia = bloco escondido. Adicionar 3 frases reais com nome e tipo de evento.
+- [ ] `videosProntos`: `false` = mostra botão para os Reels no Instagram no lugar da grade.
+      Troque para `true` depois de colocar os vídeos reais em `public/videos/`.
 
-## Mídia (substituir os placeholders gerados em /public)
-| Arquivo | Uso | Tamanho sugerido |
-|---|---|---|
-| `public/img/hero.jpg` | Foto da dupla no hero (vira duotone) | 800×1000, retrato |
-| `public/img/dupla.jpg` | Foto da seção "Quem somos" | 800×800 |
-| `public/img/og.jpg` | Imagem de compartilhamento (Open Graph) | 1200×630 |
-| `public/img/poster-casamento.jpg` | Capa do vídeo de casamento | 540×960 (9:16) |
-| `public/img/poster-formatura.jpg` | Capa do vídeo de formatura | 540×960 (9:16) |
-| `public/img/poster-casa-de-show.jpg` | Capa do vídeo de casa de show | 540×960 (9:16) |
-| `public/videos/casamento.mp4` | Vídeo curto vertical, sem depender de áudio | H.264, até ~3 MB |
-| `public/videos/formatura.mp4` | idem | idem |
-| `public/videos/casa-de-show.mp4` | idem | idem |
+## Confirmar textos escritos sem briefing
+- [ ] "Quem somos" (`src/components/AboutSection.vue`)
+- [ ] "Cuidamos do resto" (`src/components/EffortSection.vue`): passagem de som, horário, cerimonial
+- [ ] Mecanismo "Voz Trocada": a troca de vozes é mesmo marca deles?
+- [ ] Formato "Festa": tem sanfona?
+
+## Mídia
+As fotos de `hero.jpg`, `dupla.jpg` e `og.jpg` foram recortadas da arte do DVD postada
+no Instagram (resolução de print). Trocar pelos arquivos originais em alta quando a dupla mandar.
+
+| Arquivo | Uso | Tamanho sugerido | Situação |
+|---|---|---|---|
+| `public/img/hero.jpg` | Foto do hero (vira duotone) | 800×1000, retrato | provisória (print) |
+| `public/img/dupla.jpg` | "Quem somos" | 800×800 | provisória (print) |
+| `public/img/og.jpg` | Compartilhamento (Open Graph) | 1200×630 | provisória (print) |
+| `public/img/poster-*.jpg` | Capas dos vídeos | 540×960 (9:16) | placeholder |
+| `public/videos/*.mp4` | Casamento, formatura, casa de show | H.264 vertical, até ~3 MB | placeholder |

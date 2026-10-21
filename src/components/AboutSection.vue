@@ -4,7 +4,7 @@
       <figure class="sobre__foto duotone">
         <img
           src="/img/dupla.jpg"
-          alt="Retrato de Breno Ramos e Marcelo lado a lado"
+          alt="Breno Ramos e Marcelo lado a lado, de camiseta branca, fazendo careta para a foto"
           width="800"
           height="800"
           loading="lazy"
@@ -14,7 +14,7 @@
       <div>
         <h2 id="sobre-titulo">Quem somos</h2>
         <p class="sobre__texto texto-largo">
-          <span class="placeholder">[2 a 3 frases sobre a história da dupla]</span>
+          Breno Ramos e Marcelo são de Campinas e fazem sertanejo do jeito que se curte numa boa resenha: violão na mão, voz trocando de lugar e o público cantando junto. Do bar ao palco do DVD Tá Tudo BR&amp;M, a proposta é a mesma: ninguém fica só assistindo. Isso é BR&amp;M.
         </p>
         <p class="sobre__local">Campinas/SP</p>
       </div>

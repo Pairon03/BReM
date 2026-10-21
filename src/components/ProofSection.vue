@@ -1,4 +1,6 @@
 <script setup>
+import { CONTEUDO, INSTAGRAM } from '../config.js'
+import IconInstagram from './IconInstagram.vue'
 import ProofVideo from './ProofVideo.vue'
 
 const videos = [
@@ -7,7 +9,8 @@ const videos = [
   { src: '/videos/casa-de-show.mp4', poster: '/img/poster-casa-de-show.jpg', legenda: 'Casa de show' },
 ]
 
-const depoimentos = [1, 2, 3]
+const depoimentos = CONTEUDO.depoimentos
+const reelsUrl = `${INSTAGRAM.url}/reels/`
 </script>
 
 <template>
@@ -21,22 +24,28 @@ const depoimentos = [1, 2, 3]
         </p>
       </div>
 
-      <div class="prova__videos">
+      <div v-if="CONTEUDO.videosProntos" class="prova__videos">
         <ProofVideo v-for="v in videos" :key="v.src" v-bind="v" />
       </div>
+      <div v-else class="prova__reels">
+        <p>Veja a dupla ao vivo: trechos de shows, resenhas e bastidores nos Reels.</p>
+        <a class="btn btn--grande" :href="reelsUrl" target="_blank" rel="noopener">
+          <IconInstagram />
+          Assistir no Instagram
+        </a>
+      </div>
 
-      <h3 class="sr-only">Depoimentos</h3>
-      <ul class="prova__depoimentos" role="list">
-        <li v-for="d in depoimentos" :key="d">
-          <blockquote>
-            <p>“<span class="placeholder">[frase]</span>”</p>
-          </blockquote>
-          <p class="autor">
-            <span class="placeholder">[nome]</span>,
-            <span class="placeholder">[tipo de evento]</span>
-          </p>
-        </li>
-      </ul>
+      <template v-if="depoimentos.length">
+        <h3 class="sr-only">Depoimentos</h3>
+        <ul class="prova__depoimentos" role="list">
+          <li v-for="d in depoimentos" :key="d.nome">
+            <blockquote>
+              <p>“{{ d.frase }}”</p>
+            </blockquote>
+            <p class="autor">{{ d.nome }}, {{ d.evento }}</p>
+          </li>
+        </ul>
+      </template>
     </div>
   </section>
 </template>
@@ -102,7 +111,16 @@ blockquote {
 
 .autor { margin-top: 14px; color: var(--turquesa); font-weight: 700; }
 
-.prova .placeholder { color: var(--creme); background: color-mix(in srgb, var(--turquesa) 30%, transparent); }
+.prova__reels {
+  display: grid;
+  gap: 24px;
+  justify-items: start;
+  margin-top: 48px;
+  padding: 28px;
+  border: 2px solid var(--creme);
+  border-radius: var(--raio);
+}
+.prova__reels p { font-size: 1.25rem; line-height: 1.4; max-width: 40ch; }
 
 @media (min-width: 820px) {
   .prova__videos {

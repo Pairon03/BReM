@@ -33,6 +33,29 @@ export function antesDoDvd(agora = new Date()) {
   return agora < DVD.data
 }
 
+/*
+ * Conteúdo que depende da dupla. Os valores abaixo são sugestões já publicáveis;
+ * confirme com eles e ajuste aqui.
+ */
+export const CONTEUDO = {
+  // Prazo de resposta da proposta (aparece no hero)
+  prazoProposta: '24 horas',
+  // Antecedência ideal para contratar (aparece no FAQ)
+  antecedencia: 'O ideal é reservar com 3 a 6 meses de antecedência, principalmente para sábados e fim de ano',
+  // Garantia extra na seção de redução de risco (deixe '' para esconder)
+  garantiaExtra: '',
+  /*
+   * Depoimentos reais de contratantes. Enquanto a lista estiver vazia, o bloco não aparece.
+   * Formato: { frase: '...', nome: 'Ana e Pedro', evento: 'Casamento' }
+   */
+  depoimentos: [],
+  /*
+   * Vídeos de show em /public/videos. Enquanto estiver false, a seção mostra um convite
+   * para ver os vídeos no Instagram no lugar da grade de vídeos.
+   */
+  videosProntos: false,
+}
+
 export const CREDITO = {
   nome: 'Korvex',
   url: 'https://cvkorvex.vercel.app',
