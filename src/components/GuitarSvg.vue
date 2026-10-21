@@ -22,6 +22,7 @@ function lente({ x1, x2 }) {
 const root = ref(null)
 const cordaEls = ref([])
 const lenteEls = ref([])
+const ondaEls = ref([])
 const pausado = ref(false)
 
 let reduzMovimento = false
@@ -32,6 +33,10 @@ let observer = null
 const VIBRACAO = [0, 2.2, -2, 1.7, -1.4, 1.1, -0.8, 0.5, -0.3, 0].map((x) => ({
   transform: `translateX(${x}px)`,
 }))
+const ONDA = [
+  { opacity: 0.75, transform: 'scale(1)' },
+  { opacity: 0, transform: 'scale(3.4)' },
+]
 const BRILHO = [
   { opacity: 0, transform: 'scaleX(1)' },
   { opacity: 0.6, transform: 'scaleX(1)', offset: 0.08 },
@@ -44,6 +49,10 @@ function tocar() {
   cordaEls.value.forEach((el, i) => {
     el.getAnimations().forEach((a) => a.cancel())
     el.animate(VIBRACAO, { duration: 800, delay: i * 70, easing: 'linear' })
+  })
+  ondaEls.value.forEach((el, i) => {
+    el.getAnimations().forEach((a) => a.cancel())
+    el.animate(ONDA, { duration: 1400, delay: 120 + i * 220, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' })
   })
   lenteEls.value.forEach((el, i) => {
     el.getAnimations().forEach((a) => a.cancel())
@@ -90,9 +99,31 @@ onBeforeUnmount(() => {
   >
     <div class="guitar__enter">
       <svg class="guitar__breathe" viewBox="0 0 240 560" focusable="false">
+        <defs>
+          <linearGradient id="gv-corpo" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFB26B" />
+            <stop offset="0.45" stop-color="var(--laranja)" />
+            <stop offset="1" stop-color="#D8452F" />
+          </linearGradient>
+          <radialGradient id="gv-brilho" cx="0.32" cy="0.3" r="0.6">
+            <stop offset="0" stop-color="#FFF3E3" stop-opacity="0.55" />
+            <stop offset="1" stop-color="#FFF3E3" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+
         <!-- Corpo com sombra rosa deslocada (efeito de risografia fora de registro) -->
-        <path :d="corpo" fill="var(--rosa)" transform="translate(9 7)" />
-        <path :d="corpo" fill="var(--laranja)" stroke="var(--escuro)" stroke-width="4" />
+        <path :d="corpo" fill="var(--rosa)" transform="translate(10 8)" />
+        <path :d="corpo" fill="url(#gv-corpo)" stroke="var(--creme)" stroke-width="3.5" />
+        <path :d="corpo" fill="url(#gv-brilho)" />
+        <path
+          :d="corpo"
+          fill="none"
+          stroke="var(--escuro)"
+          stroke-width="2"
+          stroke-dasharray="2 5"
+          opacity="0.35"
+          transform="translate(120 382) scale(0.9) translate(-120 -382)"
+        />
 
         <!-- Escudo -->
         <path
@@ -103,13 +134,25 @@ onBeforeUnmount(() => {
         />
 
         <!-- Boca e roseta -->
-        <circle cx="120" cy="345" r="32" fill="none" stroke="var(--turquesa)" stroke-width="6" />
+        <circle cx="120" cy="345" r="34" fill="none" stroke="var(--turquesa)" stroke-width="5" />
+        <circle cx="120" cy="345" r="28.5" fill="none" stroke="var(--creme)" stroke-width="1.5" />
         <circle cx="120" cy="345" r="24" fill="var(--escuro)" />
+        <circle
+          v-for="n in 3"
+          :key="`o${n}`"
+          ref="ondaEls"
+          class="guitar__onda"
+          cx="120"
+          cy="345"
+          r="36"
+        />
 
         <!-- Mão e braço -->
         <path
           d="M101 8 L139 8 C143 8 146 11 145 15 L140 62 L100 62 L95 15 C94 11 97 8 101 8 Z"
-          fill="var(--escuro)"
+          fill="#3A2433"
+          stroke="var(--creme)"
+          stroke-width="2.5"
         />
         <g fill="var(--creme)" stroke="var(--escuro)" stroke-width="2.5">
           <circle cx="90" cy="22" r="5" />
@@ -119,7 +162,7 @@ onBeforeUnmount(() => {
           <circle cx="150" cy="37" r="5" />
           <circle cx="150" cy="52" r="5" />
         </g>
-        <rect x="107" y="60" width="26" height="256" rx="3" fill="var(--escuro)" />
+        <rect x="107" y="60" width="26" height="256" rx="3" fill="#3A2433" stroke="var(--creme)" stroke-width="2" />
         <rect x="105" y="60" width="30" height="6" rx="2" fill="var(--creme)" />
         <g stroke="var(--laranja)" stroke-width="2" opacity="0.7">
           <line x1="107" x2="133" y1="98" y2="98" />
@@ -138,7 +181,7 @@ onBeforeUnmount(() => {
         </g>
 
         <!-- Cavalete -->
-        <rect x="86" y="438" width="68" height="16" rx="5" fill="var(--escuro)" />
+        <rect x="86" y="438" width="68" height="16" rx="5" fill="#3A2433" stroke="var(--creme)" stroke-width="2" />
 
         <!-- Brilho de vibração (lente) e cordas -->
         <path
@@ -195,6 +238,15 @@ onBeforeUnmount(() => {
 
 .guitar__corda { stroke: var(--creme); }
 
+.guitar__onda {
+  fill: none;
+  stroke: var(--turquesa);
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 .guitar__lente {
   fill: var(--creme);
   opacity: 0;
@@ -211,7 +263,7 @@ onBeforeUnmount(() => {
 .nota {
   position: absolute;
   width: 14%;
-  color: var(--escuro);
+  color: var(--creme);
   opacity: 0;
   animation: nota-sobe 4.2s var(--ease-out) infinite;
 }
@@ -240,7 +292,7 @@ onBeforeUnmount(() => {
 
 @keyframes nota-sobe {
   0% { opacity: 0; transform: translateY(0) rotate(-8deg); }
-  20% { opacity: 0.35; }
+  20% { opacity: 0.55; }
   70% { opacity: 0; transform: translateY(-90px) rotate(10deg); }
   100% { opacity: 0; transform: translateY(-90px) rotate(10deg); }
 }

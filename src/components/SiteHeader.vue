@@ -36,8 +36,11 @@ import IconWhatsapp from './IconWhatsapp.vue'
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--creme);
-  border-bottom: 2px solid var(--escuro);
+  background: rgb(20 18 28 / 0.92);
+  color: var(--creme);
+  border-bottom: 1px solid rgb(255 243 227 / 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .header__inner {
@@ -85,7 +88,8 @@ import IconWhatsapp from './IconWhatsapp.vue'
   min-height: 44px;
   padding: 8px 16px;
   font-size: 0.9375rem;
-  box-shadow: 4px 4px 0 var(--escuro);
+  border-color: var(--creme);
+  box-shadow: 4px 4px 0 var(--creme);
 }
 .btn--whats svg { width: 20px; height: 20px; }
 
