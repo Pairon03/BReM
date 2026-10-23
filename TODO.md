@@ -20,7 +20,8 @@ com a dupla e trocar a mídia provisória.
 ## Confirmar textos escritos sem briefing
 - [ ] "Quem somos" (`src/components/AboutSection.vue`)
 - [ ] "Cuidamos do resto" (`src/components/EffortSection.vue`): passagem de som, horário, cerimonial
-- [ ] Mecanismo "Voz Trocada" (agora é a 1ª nota do palco do violão, `src/components/GuitarStage.vue`): a troca de vozes é mesmo marca deles?
+- [ ] Mecanismo "Voz Trocada" (1º capítulo do palco do violão, `src/components/GuitarStage.vue`): a troca de vozes é mesmo marca deles?
+- [ ] Textos dos 5 capítulos do palco (`capitulos` em `GuitarStage.vue`) e a progressão de acordes G D Em C G
 - [ ] Formato "Festa": tem sanfona?
 
 ## Mídia
