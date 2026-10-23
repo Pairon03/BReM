@@ -61,7 +61,12 @@ export const CREDITO = {
   url: 'https://cvkorvex.vercel.app',
 }
 
-// Guia do DVD: preencha quando o material chegar. Enquanto for null, a aba diz que o guia sai em breve.
+// Vídeos do guia do DVD no Instagram, na ordem em que saem. Novo vídeo = nova linha.
+export const DVD_GUIA_VIDEOS = [
+  { titulo: 'Guia do DVD #1', url: 'https://www.instagram.com/reel/Dez_BiMIhBJ/' },
+]
+
+// Guia do DVD em texto: preencha quando o material chegar. Enquanto for null, a aba diz que o guia sai em breve.
 export const DVD_GUIA = null
 // Exemplo de formato:
 // export const DVD_GUIA = [
