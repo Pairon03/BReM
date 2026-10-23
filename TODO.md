@@ -12,8 +12,8 @@ com a dupla e trocar a mídia provisória.
       Troque para `true` depois de colocar os vídeos reais em `public/videos/`.
 
 ## DVD e agenda (`src/config.js`)
-- [ ] `DVD_GUIA`: preencher quando o guia do DVD chegar. Enquanto for `null`, a aba "Guia do DVD"
-      mostra "o guia sai em breve" com link para o Instagram.
+- [x] `DVD_GUIA_VIDEOS`: Reel do 1º guia do DVD já está na aba "Guia do DVD". Novos vídeos = nova linha na lista.
+- [ ] `DVD_GUIA`: guia em texto (portões, classificação...). Enquanto for `null`, a aba mostra só os vídeos.
 - [ ] `SHOWS`: adicionar os próximos shows (data, título, local, cidade, link). Hoje só tem a
       gravação do DVD. Shows com data passada somem sozinhos; lista vazia = mensagem de agenda aberta.
 

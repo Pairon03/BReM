@@ -1,6 +1,6 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { DVD, DVD_GUIA, INSTAGRAM, antesDoDvd } from '../config.js'
+import { DVD, DVD_GUIA, DVD_GUIA_VIDEOS, INSTAGRAM, antesDoDvd } from '../config.js'
 
 const antes = antesDoDvd()
 
@@ -147,13 +147,33 @@ onBeforeUnmount(() => {
           aria-labelledby="aba-guia"
           tabindex="0"
         >
+          <div v-if="DVD_GUIA_VIDEOS.length" class="guia__videos">
+            <p class="guia__aviso-titulo">Assista antes de ir</p>
+            <p class="guia__videos-texto">
+              A dupla explica no Instagram tudo o que você precisa saber para curtir a gravação.
+            </p>
+            <ul class="guia__lista" role="list">
+              <li v-for="(v, i) in DVD_GUIA_VIDEOS" :key="v.url">
+                <a class="guia__video" :href="v.url" target="_blank" rel="noopener">
+                  <span class="guia__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false"><path d="M8 5.5v13l11-6.5z" /></svg>
+                  </span>
+                  <span>
+                    <strong>{{ v.titulo }}</strong>
+                    <span class="guia__video-sub">{{ i === DVD_GUIA_VIDEOS.length - 1 ? 'Novo · ' : '' }}Assistir no Instagram</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
           <ul v-if="DVD_GUIA" class="guia" role="list">
             <li v-for="item in DVD_GUIA" :key="item.titulo">
               <strong>{{ item.titulo }}</strong>
               <span>{{ item.texto }}</span>
             </li>
           </ul>
-          <div v-else class="guia__aviso">
+          <div v-else-if="!DVD_GUIA_VIDEOS.length" class="guia__aviso">
             <p class="guia__aviso-titulo">O guia do DVD sai em breve.</p>
             <p>
               Horário dos portões, classificação, como chegar e o que levar: tudo vai estar aqui.
@@ -329,6 +349,41 @@ onBeforeUnmount(() => {
 .guia__aviso { display: grid; gap: 10px; max-width: 56ch; font-size: 1.0625rem; }
 .guia__aviso-titulo { font-family: var(--font-titulo); font-size: 1.5rem; color: var(--laranja); }
 .guia__aviso a { color: var(--turquesa); font-weight: 700; }
+
+.guia__videos { display: grid; gap: 12px; width: 100%; }
+.guia__videos-texto { max-width: 52ch; font-size: 1.0625rem; color: rgb(255 243 227 / 0.8); }
+.guia__lista { display: grid; gap: 12px; margin: 8px 0 0; padding: 0; list-style: none; }
+
+.guia__video {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px 14px 14px;
+  border: 1.5px solid rgb(255 243 227 / 0.25);
+  border-radius: 14px;
+  color: var(--creme);
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms var(--ease-out);
+}
+.guia__video:active { transform: scale(0.98); }
+.guia__video strong { display: block; font-size: 1.125rem; }
+.guia__video-sub { font-size: 0.875rem; color: rgb(255 243 227 / 0.7); }
+
+.guia__play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rosa);
+  color: var(--escuro);
+}
+.guia__play svg { width: 22px; height: 22px; fill: currentColor; margin-left: 2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .guia__video:hover { border-color: var(--turquesa); }
+}
 
 .dvd__ingresso-texto { max-width: 48ch; font-size: 1.125rem; }
 
