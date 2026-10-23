@@ -38,7 +38,7 @@ const faixa = ['Tá Tudo BR&M', 'Voz trocada', 'Casamentos', 'Formaturas', 'Rese
         <p class="hero__dica" aria-hidden="true">
           passe nas cordas <span class="hero__dica-seta">↙</span>
         </p>
-        <figure class="hero__foto duotone">
+        <figure class="hero__foto foto">
           <img
             src="/img/hero.jpg"
             alt="Breno Ramos e Marcelo abraçados, sorrindo e mostrando a língua"

@@ -30,7 +30,7 @@ no Instagram (resolução de print). Trocar pelos arquivos originais em alta qua
 
 | Arquivo | Uso | Tamanho sugerido | Situação |
 |---|---|---|---|
-| `public/img/hero.jpg` | Foto do hero (vira duotone) | 800×1000, retrato | provisória (print) |
+| `public/img/hero.jpg` | Foto do hero | 800×1000, retrato | provisória (print) |
 | `public/img/dupla.jpg` | "Quem somos" | 800×800 | provisória (print) |
 | `public/img/og.jpg` | Compartilhamento (Open Graph) | 1200×630 | provisória (print) |
 | `public/img/poster-*.jpg` | Capas dos vídeos | 540×960 (9:16) | placeholder |
