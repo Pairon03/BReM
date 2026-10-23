@@ -20,7 +20,8 @@ com a dupla e trocar a mídia provisória.
 ## Confirmar textos escritos sem briefing
 - [ ] "Quem somos" (`src/components/AboutSection.vue`)
 - [ ] "Cuidamos do resto" (`src/components/EffortSection.vue`): passagem de som, horário, cerimonial
-- [ ] Mecanismo "Voz Trocada" (agora é a 1ª nota do palco do violão, `src/components/GuitarStage.vue`): a troca de vozes é mesmo marca deles?
+- [ ] Mecanismo "Voz Trocada" (1º capítulo do palco do violão, `src/components/GuitarStage.vue`): a troca de vozes é mesmo marca deles?
+- [ ] Textos dos 5 capítulos do palco (`capitulos` em `GuitarStage.vue`) e a progressão de acordes G D Em C G
 - [ ] Formato "Festa": tem sanfona?
 
 ## Mídia
@@ -29,7 +30,7 @@ no Instagram (resolução de print). Trocar pelos arquivos originais em alta qua
 
 | Arquivo | Uso | Tamanho sugerido | Situação |
 |---|---|---|---|
-| `public/img/hero.jpg` | Foto do hero (vira duotone) | 800×1000, retrato | provisória (print) |
+| `public/img/hero.jpg` | Foto do hero | 800×1000, retrato | provisória (print) |
 | `public/img/dupla.jpg` | "Quem somos" | 800×800 | provisória (print) |
 | `public/img/og.jpg` | Compartilhamento (Open Graph) | 1200×630 | provisória (print) |
 | `public/img/poster-*.jpg` | Capas dos vídeos | 540×960 (9:16) | placeholder |

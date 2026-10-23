@@ -26,6 +26,12 @@ function aoTeclar(e, i) {
   escolher(abas[destino].id, true)
 }
 
+// Data e hora saem de DVD.data, então mudar a data em config.js atualiza todos os textos
+const fuso = { timeZone: 'America/Sao_Paulo' }
+const dataCurta = DVD.data.toLocaleDateString('pt-BR', { ...fuso, day: '2-digit', month: '2-digit', year: 'numeric' })
+const dataLonga = DVD.data.toLocaleDateString('pt-BR', { ...fuso, day: '2-digit', month: 'long', year: 'numeric' })
+const hora = `${Number(DVD.data.toLocaleTimeString('pt-BR', { ...fuso, hour: '2-digit' }))}h`
+
 const mapa = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   `${DVD.local}, ${DVD.endereco}`,
 )}`
@@ -74,9 +80,8 @@ onBeforeUnmount(() => {
         <span class="sr-only">: o DVD de Breno Ramos &amp; Marcelo</span>
       </h2>
       <p class="dvd__linha">
-        {{ antes ? 'Gravação ao vivo do DVD' : 'DVD gravado ao vivo' }} em
-        {{ DVD.data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'America/Sao_Paulo' }) }},
-        às 14h, na {{ DVD.local }}.
+        {{ antes ? 'Gravação ao vivo do DVD' : 'DVD gravado ao vivo' }} em {{ dataCurta }}, às {{ hora }},
+        na {{ DVD.local }}.
       </p>
 
       <div class="dvd__painel">
@@ -102,7 +107,7 @@ onBeforeUnmount(() => {
         <div
           v-show="atual === 'evento'"
           id="painel-evento"
-          class="dvd__conteudo"
+          class="dvd__conteudo dvd__conteudo--evento"
           role="tabpanel"
           aria-labelledby="aba-evento"
           tabindex="0"
@@ -118,7 +123,7 @@ onBeforeUnmount(() => {
           <dl class="dvd__dados">
             <div>
               <dt>Quando</dt>
-              <dd>02 de novembro de 2026, às 14h (horário de Brasília)</dd>
+              <dd>{{ dataLonga }}, às {{ hora }} (horário de Brasília)</dd>
             </div>
             <div>
               <dt>Onde</dt>
@@ -191,7 +196,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0 0.3em;
+  gap: 0 clamp(12px, 2.4vw, 32px);
   line-height: 0.95;
 }
 
@@ -232,9 +237,9 @@ onBeforeUnmount(() => {
 }
 
 .dvd__aba {
-  flex: none;
+  flex: 1 0 auto;
   min-height: 56px;
-  padding: 0 22px;
+  padding: 0 12px;
   border: 0;
   border-bottom: 3px solid transparent;
   background: none;
@@ -328,8 +333,19 @@ onBeforeUnmount(() => {
 .dvd__ingresso-texto { max-width: 48ch; font-size: 1.125rem; }
 
 @media (min-width: 760px) {
+  .dvd__aba { flex: none; padding: 0 22px; }
   .dvd__conteudo { padding: 40px; }
   .guia { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* No desktop a contagem e os dados ficam lado a lado, sem sobrar painel vazio */
+@media (min-width: 1000px) {
+  .dvd__conteudo--evento {
+    grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+    gap: 32px 56px;
+    align-items: center;
+  }
+  .dvd__conteudo--evento .dvd__dados { grid-row: span 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {

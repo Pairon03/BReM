@@ -1,7 +1,7 @@
 <template>
   <section class="section sobre" aria-labelledby="sobre-titulo">
     <div class="container sobre__grid">
-      <figure class="sobre__foto duotone">
+      <figure class="sobre__foto foto">
         <img
           src="/img/dupla.jpg"
           alt="Breno Ramos e Marcelo lado a lado, de camiseta branca, fazendo careta para a foto"

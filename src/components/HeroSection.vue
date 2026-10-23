@@ -38,7 +38,7 @@ const faixa = ['Tá Tudo BR&M', 'Voz trocada', 'Casamentos', 'Formaturas', 'Rese
         <p class="hero__dica" aria-hidden="true">
           passe nas cordas <span class="hero__dica-seta">↙</span>
         </p>
-        <figure class="hero__foto duotone">
+        <figure class="hero__foto foto">
           <img
             src="/img/hero.jpg"
             alt="Breno Ramos e Marcelo abraçados, sorrindo e mostrando a língua"
@@ -237,7 +237,30 @@ const faixa = ['Tá Tudo BR&M', 'Voz trocada', 'Casamentos', 'Formaturas', 'Rese
   .hero__faixa { margin-top: 88px; }
 }
 
+/* Entrada do texto em cascata, uma vez ao abrir a página */
+.hero__texto > * {
+  animation: hero-in 900ms var(--ease-out) both;
+}
+.hero__eyebrow { animation-delay: 60ms; }
+.hero__titulo { animation-delay: 140ms; }
+.hero__sub { animation-delay: 260ms; }
+.hero__cta { animation-delay: 360ms; }
+
+.hero__sol { animation: sol-in 1400ms var(--ease-out) both; }
+.hero__foto { animation: hero-in 900ms var(--ease-out) 420ms both; }
+
+@keyframes hero-in {
+  from { opacity: 0; translate: 0 24px; filter: blur(8px); }
+}
+
+@keyframes sol-in {
+  from { opacity: 0; scale: 0.82; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero__faixa-trilho { animation: none; }
+  .hero__texto > *,
+  .hero__sol,
+  .hero__foto { animation: none; }
 }
 </style>
