@@ -6,7 +6,7 @@ const antes = antesDoDvd()
 </script>
 
 <template>
-  <section class="section agenda" aria-labelledby="agenda-titulo">
+  <section id="agenda" class="section agenda" aria-labelledby="agenda-titulo">
     <div class="container">
       <h2 id="agenda-titulo" class="agenda__titulo">
         Agenda <span class="agenda__ano">2027</span>

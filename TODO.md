@@ -11,10 +11,16 @@ com a dupla e trocar a mídia provisória.
 - [ ] `videosProntos`: `false` = mostra botão para os Reels no Instagram no lugar da grade.
       Troque para `true` depois de colocar os vídeos reais em `public/videos/`.
 
+## DVD e agenda (`src/config.js`)
+- [ ] `DVD_GUIA`: preencher quando o guia do DVD chegar. Enquanto for `null`, a aba "Guia do DVD"
+      mostra "o guia sai em breve" com link para o Instagram.
+- [ ] `SHOWS`: adicionar os próximos shows (data, título, local, cidade, link). Hoje só tem a
+      gravação do DVD. Shows com data passada somem sozinhos; lista vazia = mensagem de agenda aberta.
+
 ## Confirmar textos escritos sem briefing
 - [ ] "Quem somos" (`src/components/AboutSection.vue`)
 - [ ] "Cuidamos do resto" (`src/components/EffortSection.vue`): passagem de som, horário, cerimonial
-- [ ] Mecanismo "Voz Trocada": a troca de vozes é mesmo marca deles?
+- [ ] Mecanismo "Voz Trocada" (agora é a 1ª nota do palco do violão, `src/components/GuitarStage.vue`): a troca de vozes é mesmo marca deles?
 - [ ] Formato "Festa": tem sanfona?
 
 ## Mídia

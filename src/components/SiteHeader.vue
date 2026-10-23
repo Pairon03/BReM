@@ -11,7 +11,9 @@ import IconWhatsapp from './IconWhatsapp.vue'
         BR<span class="logo__amp">&amp;</span>M
       </a>
 
-      <nav class="header__acoes" aria-label="Contato">
+      <nav class="header__acoes" aria-label="Principal">
+        <a class="header__link" href="#dvd">DVD</a>
+        <a class="header__link" href="#shows">Shows</a>
         <a
           class="insta"
           :href="INSTAGRAM.url"
@@ -63,6 +65,24 @@ import IconWhatsapp from './IconWhatsapp.vue'
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.header__link {
+  display: none;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 8px;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+}
+
+@media (min-width: 900px) {
+  .header__link { display: inline-flex; }
 }
 
 .insta {

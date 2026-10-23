@@ -1,6 +1,13 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
+const props = defineProps({
+  // Acorde + giro de entrada ao carregar (hero). O palco controla tudo pela rolagem.
+  intro: { type: Boolean, default: true },
+  // Notinhas decorativas subindo em loop
+  notas: { type: Boolean, default: true },
+})
+
 // Cordas: x no capotraste (topo) e no cavalete (base)
 const NUT_Y = 64
 const BRIDGE_Y = 447
@@ -30,9 +37,8 @@ let timer = 0
 let observer = null
 
 // Oscilação que vai morrendo, como uma corda solta depois do acorde
-const VIBRACAO = [0, 2.2, -2, 1.7, -1.4, 1.1, -0.8, 0.5, -0.3, 0].map((x) => ({
-  transform: `translateX(${x}px)`,
-}))
+const OSCILACAO = [0, 2.2, -2, 1.7, -1.4, 1.1, -0.8, 0.5, -0.3, 0]
+const vibracao = (forca) => OSCILACAO.map((x) => ({ transform: `translateX(${x * forca}px)` }))
 const ONDA = [
   { opacity: 0.75, transform: 'scale(1)' },
   { opacity: 0, transform: 'scale(3.4)' },
@@ -43,12 +49,14 @@ const BRILHO = [
   { opacity: 0, transform: 'scaleX(0.2)' },
 ]
 
-function tocar() {
+/** Toca um acorde. `forca` escala a amplitude; `intervalo` é o atraso entre cordas (ms). */
+function tocar(forca = 1, intervalo = 70) {
   if (reduzMovimento) return
-  // Cordas em sequência (grave → aguda): ~1,15 s no total
+  const quadros = vibracao(forca)
+  // Cordas em sequência (grave → aguda): ~1,15 s no total com o intervalo padrão
   cordaEls.value.forEach((el, i) => {
     el.getAnimations().forEach((a) => a.cancel())
-    el.animate(VIBRACAO, { duration: 800, delay: i * 70, easing: 'linear' })
+    el.animate(quadros, { duration: 800, delay: i * intervalo, easing: 'linear' })
   })
   ondaEls.value.forEach((el, i) => {
     el.getAnimations().forEach((a) => a.cancel())
@@ -56,9 +64,11 @@ function tocar() {
   })
   lenteEls.value.forEach((el, i) => {
     el.getAnimations().forEach((a) => a.cancel())
-    el.animate(BRILHO, { duration: 800, delay: i * 70, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' })
+    el.animate(BRILHO, { duration: 800, delay: i * intervalo, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' })
   })
 }
+
+defineExpose({ tocar })
 
 function aoPassarMouse(e) {
   if (e.pointerType === 'mouse') tocar()
@@ -70,7 +80,7 @@ function aoTocar(e) {
 
 onMounted(() => {
   reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (reduzMovimento) return
+  if (reduzMovimento || !props.intro) return
 
   // O acorde de entrada começa quando o violão termina de girar para o lugar
   timer = window.setTimeout(tocar, 520)
@@ -92,7 +102,7 @@ onBeforeUnmount(() => {
   <div
     ref="root"
     class="guitar"
-    :class="{ 'is-paused': pausado }"
+    :class="{ 'is-paused': pausado, 'sem-intro': !intro }"
     aria-hidden="true"
     @pointerenter="aoPassarMouse"
     @pointerdown="aoTocar"
@@ -205,7 +215,7 @@ onBeforeUnmount(() => {
       </svg>
     </div>
 
-    <div class="guitar__notas">
+    <div v-if="notas" class="guitar__notas">
       <svg v-for="n in 3" :key="n" class="nota" viewBox="0 0 24 32" focusable="false">
         <path
           d="M9 25a5 5 0 1 1-2-4V3l13-3v19a5 5 0 1 1-2-4V5L9 7Z"
@@ -270,6 +280,9 @@ onBeforeUnmount(() => {
 .nota:nth-child(1) { left: 66%; top: 46%; animation-delay: 1.6s; }
 .nota:nth-child(2) { left: 6%; top: 54%; width: 11%; animation-delay: 3s; }
 .nota:nth-child(3) { left: 74%; top: 64%; width: 10%; animation-delay: 4.4s; }
+
+.sem-intro .guitar__enter,
+.sem-intro .guitar__breathe { animation: none; }
 
 .is-paused .guitar__breathe,
 .is-paused .nota { animation-play-state: paused; }

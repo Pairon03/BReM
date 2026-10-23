@@ -3,7 +3,9 @@ import TicketBar from './components/TicketBar.vue'
 import SiteHeader from './components/SiteHeader.vue'
 import HeroSection from './components/HeroSection.vue'
 import MirrorSection from './components/MirrorSection.vue'
-import MechanismSection from './components/MechanismSection.vue'
+import GuitarStage from './components/GuitarStage.vue'
+import DvdSection from './components/DvdSection.vue'
+import ShowsSection from './components/ShowsSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import EffortSection from './components/EffortSection.vue'
 import FormatsSection from './components/FormatsSection.vue'
@@ -23,8 +25,10 @@ import WhatsFloat from './components/WhatsFloat.vue'
   <SiteHeader />
   <main id="conteudo">
     <HeroSection />
+    <GuitarStage />
+    <DvdSection />
+    <ShowsSection />
     <MirrorSection />
-    <MechanismSection />
     <AboutSection />
     <EffortSection />
     <FormatsSection />

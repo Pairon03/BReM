@@ -60,3 +60,33 @@ export const CREDITO = {
   nome: 'Korvex',
   url: 'https://cvkorvex.vercel.app',
 }
+
+// Guia do DVD: preencha quando o material chegar. Enquanto for null, a aba diz que o guia sai em breve.
+export const DVD_GUIA = null
+// Exemplo de formato:
+// export const DVD_GUIA = [
+//   { titulo: 'Abertura dos portões', texto: '12h' },
+//   { titulo: 'Classificação', texto: 'Livre' },
+// ]
+
+/**
+ * Próximos shows. Shows com `data` no passado somem sozinhos.
+ */
+export const SHOWS = [
+  {
+    data: DVD.data,
+    titulo: 'Gravação do DVD Tá Tudo BR&M',
+    local: DVD.local,
+    cidade: 'Campinas/SP',
+    link: DVD.ingressos,
+    acao: 'Ingressos',
+    dvd: true,
+  },
+  // { data: new Date('2026-12-05T21:00:00-03:00'), titulo: 'Nome do evento', local: 'Local',
+  //   cidade: 'Cidade/UF', link: 'https://...', acao: 'Ingressos' },
+  // Evento privado: deixe `link: null` e aparece "Evento fechado".
+]
+
+export function proximosShows(agora = new Date()) {
+  return SHOWS.filter((s) => s.data > agora)
+}

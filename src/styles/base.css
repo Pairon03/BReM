@@ -203,3 +203,5 @@ a { color: inherit; }
   html { scroll-behavior: auto; }
   .btn { transition: none; }
 }
+
+section[id] { scroll-margin-top: 72px; }
